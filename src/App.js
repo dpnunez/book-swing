@@ -19,7 +19,7 @@ const Wrapper = styled.section`
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  background-color: yellow;
+  background-color: #eaeaea;
 
   display: flex;
   align-items: center;
