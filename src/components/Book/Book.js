@@ -27,7 +27,7 @@ const Book = () => {
 	return (
 		<React.Fragment>
 			<button onClick={previousPage}>previous</button>
-			<BookContainer closed={store.page === 0 || store.page === store.total}>
+			<BookContainer closed={(store.page === 0 && 'start') || (store.page === store.total && 'end')}>
 				<Side paginated />
 				<Side>
 					<Page front={4} back={5} bg='blue'/>
@@ -47,7 +47,7 @@ const BookContainer = styled.div`
 	height: 80%;
 	width: 70%;
 	border: 2px solid grey;
-	transform: ${({closed}) => `translateX(${closed ? '-20%' : '0'})`};
+	transform: ${({closed}) => console.log(closed) || `translateX(${closed ? (closed === 'start' ? '-20%' : '20%') : '0'})`};
 	transition: transform 0.5s ease 0.4s
 `
 
