@@ -42,20 +42,35 @@ const Page = ({front, back, page, ...props}) => {
 
 	return (
 		<ContainerPage zIndex={generateIndex} bg={props.bg} isPaginated={store.page > front}>
-			<Content>
-			<Block className="Image-1"></Block>
-			<Block className="Image-2"></Block>
-			<Block className="Image-3">
-				<Block className="Image-31"></Block>
-				<Block className="Image-32"></Block>
-				<Block className="Image-33"></Block>
-				<Block className="Image-34"></Block>
-			</Block>
-			<Block className="Image-4"></Block>
-			<Block className="Image-5"></Block>
-			<Block className="Image-6"></Block>
-			<Block className="Image-7"></Block>
+			<Content className='front'>
+					<Block className="Image-1"></Block>
+					<Block className="Image-2"></Block>
+					<Block className="Image-3">
+						<Block className="Image-31"></Block>
+						<Block className="Image-32"></Block>
+						<Block className="Image-33"></Block>
+						<Block className="Image-34"></Block>
+					</Block>
+					<Block className="Image-4"></Block>
+					<Block className="Image-5"></Block>
+					<Block className="Image-6"></Block>
+					<Block className="Image-7"></Block>
 			</Content>
+
+			<Content className='back' style={{transform: 'rotateY(180deg)'}}>
+				<Block className="Image-1"></Block>
+						<Block className="Image-2"></Block>
+						<Block className="Image-3">
+							<Block className="Image-31"></Block>
+							<Block className="Image-32"></Block>
+							<Block className="Image-33"></Block>
+							<Block className="Image-34"></Block>
+						</Block>
+						<Block className="Image-4"></Block>
+						<Block className="Image-5"></Block>
+						<Block className="Image-6"></Block>
+						<Block className="Image-7"></Block>
+				</Content>
 		</ContainerPage>
 	)
 }
@@ -63,12 +78,12 @@ const Page = ({front, back, page, ...props}) => {
 const ContainerPage = styled.div`
 	width: 100%;
 	height: 100%;
-	/* background-color: ${({bg = 'light-grey'}) => bg}; */
 	background-color: white;
 	transform-style: preserve-3d;
 	transition: transform 1s cubic-bezier(0.250, 0.460, 0.450, 0.940);
 	position: absolute;
 	z-index: ${({zIndex}) => zIndex};
+
 
 	${({isPaginated}) => `
 		transform: ${isPaginated ? 'rotateY(-180deg)' : 'rotateY(0deg)'};
@@ -77,47 +92,57 @@ const ContainerPage = styled.div`
 `
 
 const Content = styled.div`
-height: 100%;
+	height: 100%;
+	&.front, &.back {
+		-webkit-backface-visibility: hidden; /* Safari */
+		backface-visibility: hidden;
+		position: absolute;
+	} 
+	&.front, &.back {
 
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-  gap: 5px 5px;
-  grid-template-areas: "Image-1 Image-1 Image-1 Image-1 Image-1 Image-1 Image-1 Image-2 Image-2 Image-2 Image-2" "Image-1 Image-1 Image-1 Image-1 Image-1 Image-1 Image-1 Image-2 Image-2 Image-2 Image-2" "Image-1 Image-1 Image-1 Image-1 Image-1 Image-1 Image-1 Image-2 Image-2 Image-2 Image-2" "Image-3 Image-3 Image-3 Image-3 Image-4 Image-4 Image-4 Image-4 Image-4 Image-4 Image-4" "Image-3 Image-3 Image-3 Image-3 Image-4 Image-4 Image-4 Image-4 Image-4 Image-4 Image-4" "Image-3 Image-3 Image-3 Image-3 Image-4 Image-4 Image-4 Image-4 Image-4 Image-4 Image-4" "Image-5 Image-5 Image-5 Image-5 Image-5 Image-5 Image-6 Image-6 Image-6 Image-6 Image-6" "Image-5 Image-5 Image-5 Image-5 Image-5 Image-5 Image-6 Image-6 Image-6 Image-6 Image-6" "Image-7 Image-7 Image-7 Image-7 Image-7 Image-7 Image-7 Image-7 Image-7 Image-7 Image-7" "Image-7 Image-7 Image-7 Image-7 Image-7 Image-7 Image-7 Image-7 Image-7 Image-7 Image-7" "Image-7 Image-7 Image-7 Image-7 Image-7 Image-7 Image-7 Image-7 Image-7 Image-7 Image-7";
+		width: 100%;
+		height: 100%;
 
-	.Image-1 { grid-area: Image-1; }
-
-	.Image-2 { grid-area: Image-2; }
-
-	.Image-3 {
-		border: none;
-		background-color: transparent;
 		display: grid;
-		grid-template-columns: 1fr 1fr;
-		grid-template-rows: 1fr 1fr;
+		grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+		grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 		gap: 5px 5px;
-		grid-template-areas: "Image-31 Image-32" "Image-33 Image-34";
-		grid-area: Image-3;
-	}
+		grid-template-areas: "Image-1 Image-1 Image-1 Image-1 Image-1 Image-1 Image-1 Image-2 Image-2 Image-2 Image-2" "Image-1 Image-1 Image-1 Image-1 Image-1 Image-1 Image-1 Image-2 Image-2 Image-2 Image-2" "Image-1 Image-1 Image-1 Image-1 Image-1 Image-1 Image-1 Image-2 Image-2 Image-2 Image-2" "Image-3 Image-3 Image-3 Image-3 Image-4 Image-4 Image-4 Image-4 Image-4 Image-4 Image-4" "Image-3 Image-3 Image-3 Image-3 Image-4 Image-4 Image-4 Image-4 Image-4 Image-4 Image-4" "Image-3 Image-3 Image-3 Image-3 Image-4 Image-4 Image-4 Image-4 Image-4 Image-4 Image-4" "Image-5 Image-5 Image-5 Image-5 Image-5 Image-5 Image-6 Image-6 Image-6 Image-6 Image-6" "Image-5 Image-5 Image-5 Image-5 Image-5 Image-5 Image-6 Image-6 Image-6 Image-6 Image-6" "Image-7 Image-7 Image-7 Image-7 Image-7 Image-7 Image-7 Image-7 Image-7 Image-7 Image-7" "Image-7 Image-7 Image-7 Image-7 Image-7 Image-7 Image-7 Image-7 Image-7 Image-7 Image-7" "Image-7 Image-7 Image-7 Image-7 Image-7 Image-7 Image-7 Image-7 Image-7 Image-7 Image-7";
 
-	.Image-31 { grid-area: Image-31; }
+		.Image-1 { grid-area: Image-1; }
 
-	.Image-32 { grid-area: Image-32; }
+		.Image-2 { grid-area: Image-2; }
 
-	.Image-33 { grid-area: Image-33; }
+		.Image-3 {
+			border: none;
+			background-color: transparent;
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			grid-template-rows: 1fr 1fr;
+			gap: 5px 5px;
+			grid-template-areas: "Image-31 Image-32" "Image-33 Image-34";
+			grid-area: Image-3;
+		}
 
-	.Image-34 { grid-area: Image-34; }
+		.Image-31 { grid-area: Image-31; }
 
-	.Image-4 { grid-area: Image-4; }
+		.Image-32 { grid-area: Image-32; }
 
-	.Image-5 { grid-area: Image-5; }
+		.Image-33 { grid-area: Image-33; }
 
-	.Image-6 { grid-area: Image-6; }
+		.Image-34 { grid-area: Image-34; }
 
-	.Image-7 { grid-area: Image-7; }
+		.Image-4 { grid-area: Image-4; }
 
-	div {
-		background-color: grey;
+		.Image-5 { grid-area: Image-5; }
+
+		.Image-6 { grid-area: Image-6; }
+
+		.Image-7 { grid-area: Image-7; }
+
+		div {
+			background-color: grey;
+		}
 	}
 `
 
